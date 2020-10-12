@@ -27,16 +27,20 @@ public class Creation {
 		while (input.hasNextLine()) { // O(N^2)
 			String line = input.nextLine();
 			String[] arrayWordsTemp = line.replaceAll("[^a-zA-Z\\s]+", "").split(" ");
-			Words[] WordsArray = new Words[arrayWordsTemp.length];
-			for (int i = 0; i < arrayWordsTemp.length; i++) {
-				Words wordsPosition = new Words(numLine, i + 1, arrayWordsTemp[i]);
-				WordsArray[i] = wordsPosition;
-				// insert into the link list:
-				char firstChar = Character.toLowerCase(arrayWordsTemp[i].charAt(0));
-				MyLinkedList<Words> currentLinkList = charsTable.search(firstChar).getLinklist();
-				currentLinkList.add(wordsPosition);
+			if(!(line.equals(""))) {
+				Words[] WordsArray = new Words[arrayWordsTemp.length];
+				for (int i = 0; i < arrayWordsTemp.length; i++) {
+					if(!(arrayWordsTemp[i].equals(""))) {
+						Words wordsPosition = new Words(numLine, i + 1, arrayWordsTemp[i]);
+						WordsArray[i] = wordsPosition;
+						// insert into the link list:
+						char firstChar = Character.toLowerCase(arrayWordsTemp[i].charAt(0));
+						MyLinkedList<Words> currentLinkList = charsTable.search(firstChar).getLinklist();
+						currentLinkList.add(wordsPosition);
+					}
+				}
 			}
-			numLine++;
+			numLine++;			
 		}
 		// Sort the link list in the table, by Merge Sort.
 		for (int i = 0; i < alphabet.length; i++) { // O(26) <= O(N) <= O(NLOGN)

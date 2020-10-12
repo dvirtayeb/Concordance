@@ -85,6 +85,7 @@ public class MyLinkedList<T> {
 		String aValue = ((Words) a.data).getWord();
 		String bValue = ((Words) b.data).getWord();
 		if (aValue.compareToIgnoreCase(bValue) <= 0) {
+//			System.out.print(aValue +"--"+ bValue);
 			result = a;
 			result.next = sortedMerge(a.getNext(), b);
 		} else {
