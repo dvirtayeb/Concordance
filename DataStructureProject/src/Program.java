@@ -9,9 +9,9 @@ public class Program {
 		Creation creator = new Creation();
 		Scanner scanner = new Scanner(System.in);
 		// Read the file and create the table.
-		File file = new File("C:/Users/dvir tayeb/Desktop/New Text Document (2).txt");
+		File file = new File("C:/Users/dvir tayeb/Desktop/WILLIAM.txt");
 		WordsIndex<MyLinkedList<Words>> hashTable = creator.createTableFromTextFile(file);
-		System.out.println(hashTable.toString());
+		System.out.println("End sort, now its write to a new file.........");
 		FileWriter newFile = new FileWriter("C:/Users/dvir tayeb/Desktop/Document(4).txt");
 		newFile.write(hashTable.toString());
 		newFile.close();

@@ -1,7 +1,7 @@
 
 public class Words {
 	private int line;
-	private String word;
+	public String word;
 	private int index;
 
 	public Words(int line, int index, String word) {

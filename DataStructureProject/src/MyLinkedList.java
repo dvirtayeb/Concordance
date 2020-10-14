@@ -36,7 +36,7 @@ public class MyLinkedList<T> {
 			}
 			tempNode = tempNode.next;
 		}
-		if (arrayOfWord[0] != null)
+		if (first != null)
 			return printArr(arrayOfWord, tempCount);
 		return "Not found";
 	}
@@ -48,82 +48,65 @@ public class MyLinkedList<T> {
 		}
 		return temp;
 	}
+
 	
-	MyNodeOfLinkList<T> mergeSort(MyNodeOfLinkList<T> head) {
+	public MyNodeOfLinkList<T> mergeSort(MyNodeOfLinkList<T> head) {
 
 		// Base case : if head is null
 		if (head == null || head.next == null) {
 			return head;
 		}
-
 		// get the middle of the list
-		MyNodeOfLinkList<T>[] arr = findMiddleAndSplit(head);
-		MyNodeOfLinkList<T> first_half = arr[0];
-		MyNodeOfLinkList<T> second_half = arr[1];
-
-		// Apply mergeSort on left list
-		first_half = mergeSort(first_half);
-
-		// Apply mergeSort on right list
-		second_half = mergeSort(second_half);
-
+		MyNodeOfLinkList<T> middle = getMiddle(head);
+		MyNodeOfLinkList<T> nextOfMiddle = middle.next;
+		middle.next = null;
+		
 		// Merge the left and right lists
-		MyNodeOfLinkList<T> sortedlist = sortedMerge(first_half, second_half);
-
-		return sortedlist;
+		return sortedMerge(mergeSort(head), mergeSort(nextOfMiddle));
 	}
+	
+	MyNodeOfLinkList<T> sortedMerge(MyNodeOfLinkList<T> headA, MyNodeOfLinkList<T> headB){
 
-	MyNodeOfLinkList<T> sortedMerge(MyNodeOfLinkList<T> a, MyNodeOfLinkList<T> b) {
-		/* Base cases */
-		if (a == null)
-			return b;
-		if (b == null)
-			return a;
-
-		MyNodeOfLinkList<T> result = null;
-		/* Pick either a or b, and recur */
-		String aValue = ((Words) a.data).getWord();
-		String bValue = ((Words) b.data).getWord();
-		if (aValue.compareToIgnoreCase(bValue) <= 0) {
-//			System.out.print(aValue +"--"+ bValue);
-			result = a;
-			result.next = sortedMerge(a.getNext(), b);
-		} else {
-			result = b;
-			result.next = sortedMerge(a, b.getNext());
-		}
-		return result;
-	}
-
-	// splitting list into two halves
-	public MyNodeOfLinkList<T>[] findMiddleAndSplit(MyNodeOfLinkList<T> ptr) {
-		// base case
-		if (ptr == null || ptr.next == null) {
-			@SuppressWarnings("unchecked")
-			MyNodeOfLinkList<T>[] ret = new MyNodeOfLinkList[] { ptr, null };
-			return ret;
-		}
-
-		MyNodeOfLinkList<T> backward = ptr;
-		MyNodeOfLinkList<T> forward = ptr.next;
-
-		// Forward moves twice and backward moves once
-		while (forward != null) {
-			forward = forward.next;
-			if (forward != null) {
-				backward = backward.next;
-				forward = forward.next;
+		MyNodeOfLinkList<T> dummyNode = new MyNodeOfLinkList<T>(null, null);
+		MyNodeOfLinkList<T> tail = dummyNode;
+		while(headA != null && headB !=null){
+			String aValue = ((Words) headA.data).getWord();
+			String bValue = ((Words) headB.data).getWord();
+			
+			if (aValue.compareToIgnoreCase(bValue) <= 0) {
+				tail.next = headA;
+				tail = headA;
+				headA = headA.next;
+				System.out.println(tail.data);
+			}
+			else{
+				tail.next = headB;
+				tail = headB;
+				headB = headB.next;
+				System.out.println(tail.data);
 			}
 		}
-
-		// splitting the linked list
-		@SuppressWarnings("unchecked")
-		MyNodeOfLinkList<T>[] arr = new MyNodeOfLinkList[] { ptr, backward.next };
-		backward.next = null;
-
-		return arr;
+		if(headA != null)
+			tail.next = headA;
+		else if(headB != null)
+			tail.next = headB;
+		return dummyNode.next;
 	}
-
+	
+	 public  MyNodeOfLinkList<T> getMiddle(MyNodeOfLinkList<T> head) 
+	    { 
+	        if (head == null) 
+	            return head; 
+	  
+	        MyNodeOfLinkList<T> slow = head, fast = head; 
+	  
+	        while (fast.next != null && fast.next.next != null) { 
+	            slow = slow.next; 
+	            fast = fast.next.next; 
+	        } 
+	        return slow; 
+	    }
+	
 	public MyNodeOfLinkList<T> getFirst() {
 		return first;
 	}

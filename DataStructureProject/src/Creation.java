@@ -30,7 +30,7 @@ public class Creation {
 			if(!(line.equals(""))) {
 				Words[] WordsArray = new Words[arrayWordsTemp.length];
 				for (int i = 0; i < arrayWordsTemp.length; i++) {
-					if(!(arrayWordsTemp[i].equals(""))) {
+					if(!(arrayWordsTemp[i].equals("") || !(arrayWordsTemp[i].length() > 1))) {
 						Words wordsPosition = new Words(numLine, i + 1, arrayWordsTemp[i]);
 						WordsArray[i] = wordsPosition;
 						// insert into the link list:
