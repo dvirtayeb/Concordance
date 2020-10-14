@@ -15,7 +15,7 @@ public class Creation {
 	public WordsIndex<MyLinkedList<Words>> createTableFromTextFile(File file) throws Exception, FileNotFoundException {
 		Scanner input = new Scanner(file);
 		int numLine = 1;
-		
+
 		// insert the alphabet for hashMap into the data structure: WordsIndex
 		alphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
 		for (int i = 0; i < alphabet.length; i++) { // O(26) <= O(N)
@@ -27,10 +27,10 @@ public class Creation {
 		while (input.hasNextLine()) { // O(N^2)
 			String line = input.nextLine();
 			String[] arrayWordsTemp = line.replaceAll("[^a-zA-Z\\s]+", "").split(" ");
-			if(!(line.equals(""))) {
+			if (!(line.equals(""))) {
 				Words[] WordsArray = new Words[arrayWordsTemp.length];
 				for (int i = 0; i < arrayWordsTemp.length; i++) {
-					if(!(arrayWordsTemp[i].equals("") || !(arrayWordsTemp[i].length() > 1))) {
+					if (!(arrayWordsTemp[i].equals("") || !(arrayWordsTemp[i].length() > 1))) {
 						Words wordsPosition = new Words(numLine, i + 1, arrayWordsTemp[i]);
 						WordsArray[i] = wordsPosition;
 						// insert into the link list:
@@ -40,7 +40,7 @@ public class Creation {
 					}
 				}
 			}
-			numLine++;			
+			numLine++;
 		}
 		// Sort the link list in the table, by Merge Sort.
 		for (int i = 0; i < alphabet.length; i++) { // O(26) <= O(N) <= O(NLOGN)

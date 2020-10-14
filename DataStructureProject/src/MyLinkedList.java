@@ -49,7 +49,6 @@ public class MyLinkedList<T> {
 		return temp;
 	}
 
-	
 	public MyNodeOfLinkList<T> mergeSort(MyNodeOfLinkList<T> head) {
 
 		// Base case : if head is null
@@ -60,53 +59,51 @@ public class MyLinkedList<T> {
 		MyNodeOfLinkList<T> middle = getMiddle(head);
 		MyNodeOfLinkList<T> nextOfMiddle = middle.next;
 		middle.next = null;
-		
+
 		// Merge the left and right lists
 		return sortedMerge(mergeSort(head), mergeSort(nextOfMiddle));
 	}
-	
-	MyNodeOfLinkList<T> sortedMerge(MyNodeOfLinkList<T> headA, MyNodeOfLinkList<T> headB){
+
+	MyNodeOfLinkList<T> sortedMerge(MyNodeOfLinkList<T> headA, MyNodeOfLinkList<T> headB) {
 
 		MyNodeOfLinkList<T> dummyNode = new MyNodeOfLinkList<T>(null, null);
 		MyNodeOfLinkList<T> tail = dummyNode;
-		while(headA != null && headB !=null){
+		while (headA != null && headB != null) {
 			String aValue = ((Words) headA.data).getWord();
 			String bValue = ((Words) headB.data).getWord();
-			
+
 			if (aValue.compareToIgnoreCase(bValue) <= 0) {
 				tail.next = headA;
 				tail = headA;
 				headA = headA.next;
 				System.out.println(tail.data);
-			}
-			else{
+			} else {
 				tail.next = headB;
 				tail = headB;
 				headB = headB.next;
 				System.out.println(tail.data);
 			}
 		}
-		if(headA != null)
+		if (headA != null)
 			tail.next = headA;
-		else if(headB != null)
+		else if (headB != null)
 			tail.next = headB;
 		return dummyNode.next;
 	}
-	
-	 public  MyNodeOfLinkList<T> getMiddle(MyNodeOfLinkList<T> head) 
-	    { 
-	        if (head == null) 
-	            return head; 
-	  
-	        MyNodeOfLinkList<T> slow = head, fast = head; 
-	  
-	        while (fast.next != null && fast.next.next != null) { 
-	            slow = slow.next; 
-	            fast = fast.next.next; 
-	        } 
-	        return slow; 
-	    }
-	
+
+	public MyNodeOfLinkList<T> getMiddle(MyNodeOfLinkList<T> head) {
+		if (head == null)
+			return head;
+
+		MyNodeOfLinkList<T> slow = head, fast = head;
+
+		while (fast.next != null && fast.next.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		return slow;
+	}
+
 	public MyNodeOfLinkList<T> getFirst() {
 		return first;
 	}

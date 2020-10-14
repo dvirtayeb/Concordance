@@ -9,7 +9,7 @@ public class Words {
 		this.index = index;
 		this.word = word;
 	}
-	
+
 	public int getIndex() {
 		return index;
 	}
@@ -25,13 +25,13 @@ public class Words {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-			builder.append("[");
-			builder.append(word);
-			builder.append(", index= ");
-			builder.append(index);
-			builder.append(", line= ");
-			builder.append(line);
-			builder.append("]");
+		builder.append("[");
+		builder.append(word);
+		builder.append(", index= ");
+		builder.append(index);
+		builder.append(", line= ");
+		builder.append(line);
+		builder.append("]");
 		return builder.toString();
 	}
 

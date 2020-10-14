@@ -27,6 +27,5 @@ public class MyNodeOfLinkList<T> {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 }

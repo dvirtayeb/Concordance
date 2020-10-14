@@ -15,7 +15,7 @@ public class NodeHashing {
 	public int getKey() {
 		return key;
 	}
-	
+
 	public String toString() {
 		String result = "{Key: \"" + this.key + "\": LinkList: \"" + this.linkList + "\"}\n";
 		return result;
