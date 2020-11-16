@@ -24,7 +24,7 @@ public class Creation {
 		}
 
 		// read the text and insert into the data structure: WordsIndex
-		while (input.hasNextLine()) { // O(N^2)
+		while (input.hasNextLine()) { // O(N*K)
 			String line = input.nextLine();
 			String[] arrayWordsTemp = line.replaceAll("[^a-zA-Z\\s]+", "").split(" ");
 			if (!(line.equals(""))) {
@@ -43,10 +43,10 @@ public class Creation {
 			numLine++;
 		}
 		// Sort the link list in the table, by Merge Sort.
-		for (int i = 0; i < alphabet.length; i++) { // O(26) <= O(N) <= O(NLOGN)
+		for (int i = 0; i < alphabet.length; i++) { // O(26) <= O(N) <= O(NLOG(n/2))
 			MyLinkedList<Words> currentLinkListInHashMap = charsTable.search(alphabet[i]).getLinklist(); // O(1)
 			MyNodeOfLinkList<Words> firstNode = currentLinkListInHashMap.getFirst();
-			currentLinkListInHashMap.setFirst(currentLinkListInHashMap.mergeSort(firstNode)); // O(NLOGN)
+			currentLinkListInHashMap.setFirst(currentLinkListInHashMap.mergeSort(firstNode)); // O(NLOG(n/2))
 		}
 		input.close();
 		return charsTable;
